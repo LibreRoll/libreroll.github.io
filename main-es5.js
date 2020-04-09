@@ -200,6 +200,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       path: '',
       component: _page_main_page_main_component__WEBPACK_IMPORTED_MODULE_7__["PageMainComponent"],
       pathMatch: 'full'
+    }, {
+      path: 'profile',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | src-app-page-profile-page-profile-module */
+        "src-app-page-profile-page-profile-module").then(__webpack_require__.bind(null,
+        /*! src/app/page-profile/page-profile.module */
+        "./src/app/page-profile/page-profile.module.ts")).then(function (m) {
+          return m.PageProfileModule;
+        });
+      }
     }];
 
     var AppModule = function AppModule() {
@@ -273,6 +284,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
     var wait = function wait(ms) {
       return new Promise(function (resolve) {
@@ -281,9 +298,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     var AuthService = /*#__PURE__*/function () {
-      function AuthService() {
+      function AuthService(router) {
         _classCallCheck(this, AuthService);
 
+        this.router = router;
         this.hLoggedIn = false;
       }
 
@@ -321,6 +339,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 0:
                     return _context2.abrupt("return", wait(2000).then(function () {
                       _this2.hLoggedIn = false;
+
+                      _this2.router.navigate(['/']);
                     }));
 
                   case 1:
@@ -350,6 +370,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
+        key: "getUsername",
+        value: function getUsername() {
+          if (this.loggedIn) {
+            return 'Test User';
+          }
+
+          return null;
+        }
+      }, {
         key: "loggedIn",
         get: function get() {
           return this.hLoggedIn;
@@ -360,7 +389,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     AuthService.ɵfac = function AuthService_Factory(t) {
-      return new (t || AuthService)();
+      return new (t || AuthService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]));
     };
 
     AuthService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
@@ -377,7 +406,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           providedIn: 'root'
         }]
       }], function () {
-        return [];
+        return [{
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        }];
       }, null);
     })();
     /***/
@@ -1364,7 +1395,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @fortawesome/angular-fontawesome */
     "./node_modules/@fortawesome/angular-fontawesome/__ivy_ngcc__/fesm2015/angular-fontawesome.js");
 
@@ -1514,7 +1551,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-navbar-user"]],
       decls: 2,
       vars: 2,
-      consts: [["class", "buttons", 4, "ngIf"], [1, "buttons"], [1, "button", 3, "click"], [1, "button", "is-dark", 3, "click"], [1, "button"], [1, "icon"], [3, "icon"]],
+      consts: [["class", "buttons", 4, "ngIf"], [1, "buttons"], [1, "button", 3, "click"], [1, "button", "is-dark", 3, "click"], ["routerLink", "/profile", 1, "button"], [1, "icon"], [3, "icon"]],
       template: function NavbarUserComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, NavbarUserComponent_div_0_Template, 5, 0, "div", 0);
@@ -1530,7 +1567,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.auth.loggedIn);
         }
       },
-      directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FaIconComponent"]],
+      directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterLinkWithHref"], _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_6__["FaIconComponent"]],
       styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL25hdmJhci11c2VyL25hdmJhci11c2VyLmNvbXBvbmVudC5jc3MifQ== */"]
     });
     /*@__PURE__*/
